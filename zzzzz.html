@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+
+p{
+	font-size: 40px;
+	text-align: center;
+	margin-top: 8px;
+}
+.btnn{
+	margin-left: auto;
+	margin-right: auto;
+	width: 150px;
+	transition: 1s;
+}
+.btn{
+	width: 150px;
+}
+.rel{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background:blue;
+	color:white;
+	font-size: 40px;
+}
+/*-----------------------------ИГРОК-------------------------------*/
+
+
+		.caloda_player{
+			width: 100%;
+			height: 210px;
+			border:2px solid red;
+			padding-bottom:40px; 
+			
+		}
+		.caloda_player_down{
+			height: 205px;
+			border:2px solid green;
+			margin-left: auto;
+    		margin-right: auto;
+    		width: 900px;
+    		display: flex;
+		}
+		.carta_player_1,.carta_player_2 ,.carta_player_3,.carta_player_4,.carta_player_5,.carta_player_6{
+			width: 125px;
+			height: 200px;
+			background-color: yellow;
+			transition: 0.8s;
+			margin-left: 25px;
+			transition: 1s;
+		}
+		.field_player{
+			width:100%;
+			height: 270px;
+			border:2px solid blue;
+			display: flex;
+			transition: 1s;
+		}
+		.field_player_down_1,.field_player_down_2,.field_player_down_3{
+			width: 33%;
+			height: 100%;
+			border:2px solid purple;
+		}
+		.carta_playr_in_field_1,.carta_playr_in_field_2,.carta_playr_in_field_3,.carta_playr_in_field_4,.carta_playr_in_field_5,.carta_playr_in_field_6{
+			width: 125px;
+			height: 200px;
+			background-color: yellow;
+			margin-left: auto;
+			margin-right: auto;
+			display: none;
+			transition: 1s;
+		}
+
+		.carta_player_1:hover {transform: scale(1.4)}
+		.carta_player_2:hover {transform: scale(1.4)}
+		.carta_player_3:hover {transform: scale(1.4)}
+		.carta_player_4:hover {transform: scale(1.4)}
+		.carta_player_5:hover {transform: scale(1.4)}
+		.carta_player_6:hover {transform: scale(1.4)}
+
+		.options_player_1,.options_player_2,.options_player_3,.options_player_4,.options_player_5,.options_player_6,.options_player_7,.options_player_8{
+			width: 100%;
+			height:60px;
+			border-top:2px solid black;
+			margin-top: 0px;
+			display: flex;
+		}
+		.dmg_player_1,.dmg_player_2,.dmg_player_3,.dmg_player_4,.dmg_player_5,.dmg_player_6,.dmg_player_7,.dmg_player_8{
+			height: 100%;
+			width: 62px;
+			background-color:red;	
+			border-right:2px solid black; 		 
+		}
+		.shield_player_1,.shield_player_2,.shield_player_3,.shield_player_4,.shield_player_5,.shield_player_6,.shield_player_7,.shield_player_8{
+			height: 100%;
+			width: 62px;
+			background-color:green;
+		}
+
+
+
+
+
+
+/*-----------------------ВРАГ--------------------------\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/-------------------------------------------------------------*/
+
+
+		.caloda_enemy{
+			width: 100%;
+			height: 210px;
+			border:2px solid red;
+		} 
+		.caloda_enemy_down{
+			height: 205px;
+			border:2px solid green;
+			margin-left: auto;
+    		margin-right: auto;
+    		width: 475px;
+    		display: flex;
+		}
+		.carta_enemy_1,.carta_enemy_2,.carta_enemy_3{
+			width: 125px;
+			height: 200px;
+			background-color: yellow;
+			margin-left: 25px;
+			transition: 3s;
+		} 
+		.field_enemy{
+			width:100%;
+			height: 270px;
+			border:2px solid blue;
+			display: flex;
+			transition: 1s;
+		}
+		.field_enemy_down_1,.field_enemy_down_2,.field_enemy_down_3{
+			width: 33%;
+			height: 100%;
+			border:2px solid purple;
+
+		}	
+		.carta_enemy_in_field_1,.carta_enemy_in_field_2,.carta_enemy_in_field_3{
+			width: 125px;
+			height: 200px;
+			background-color: yellow;
+			margin-left: auto;
+			margin-right: auto;
+			transition: 1s;
+			margin-top:-90px;
+			transition: 1.5s;
+			opacity: 0;
+		}
+		.options_enemy_1,.options_enemy_2,.options_enemy_3,.options_enemy_4,.options_enemy_5,.options_enemy_6{
+			width: 100%;
+			height:60px;
+			border-top:2px solid black;
+			margin-top: 140px;
+			display: flex;
+		}
+		.dmg_enemy_1,.dmg_enemy_2,.dmg_enemy_3,.dmg_enemy_4,.dmg_enemy_5,.dmg_enemy_6{
+			height: 100%;
+			width: 62px;
+			background-color:red;	
+			border-right:2px solid black;
+		}
+		.shield_enemy_1,.shield_enemy_2,.shield_enemy_3,.shield_enemy_4,.shield_enemy_5,.shield_enemy_6{
+			height: 100%;
+			width: 62px;
+			background-color:green;
+		}
+
+	</style>		
+</head>
+<body>
+<!--Колода противника-->
+	<div class="caloda_enemy">
+		<div class="caloda_enemy_down">
+			<div class="carta_enemy_1"></div>
+			<div class="carta_enemy_2"></div>
+			<div class="carta_enemy_3"></div>
+		</div>
+	</div>
+<!--Поле врага-->
+	<div class="field_enemy">
+		<div class="field_enemy_down_1">
+			<div class="carta_enemy_in_field_1">
+				<div class="options_enemy_1">
+					<div class="dmg_enemy_1"><p class="dmg_En_1"></p></div>
+					<div class="shield_enemy_1"><p class="shield_En_1"></p></div>
+				</div>
+			</div>
+		</div>
+		<div class="field_enemy_down_2">
+			<div class="carta_enemy_in_field_2">
+				<div class="options_enemy_2">
+					<div class="dmg_enemy_2"><p class="dmg_En_2"></p></div>
+					<div class="shield_enemy_2"><p class="shield_En_2"></p></div>
+				</div>
+			</div>
+		</div>
+		<div class="field_enemy_down_3">
+			<div class="carta_enemy_in_field_3">
+				<div class="options_enemy_3">
+					<div class="dmg_enemy_3"><p class="dmg_En_3"></p></div>
+					<div class="shield_enemy_3"><p class="shield_En_3"></p></div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+<!-------------------------------------Поле игрока------------------------------------------------------------------------------------->
+<div class="btnn"><button class="btn"><h1>БОЙ</h1></button></div>
+
+<!-------------------------------------Поле игрока------------------------------------------------------------------------------------->
+	<div class="field_player">
+		<div class="field_player_down_1">
+			<div class="carta_playr_in_field_1">
+				<div class="options_player_1">
+					<div class="dmg_player_1"><p class="dmg_Pl_1">2</p></div>
+					<div class="shield_player_1"><p class="shield_Pl_1">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_2">
+				<div class="options_player_2">
+					<div class="dmg_player_2"><p class="dmg_Pl_2">2</p></div>
+					<div class="shield_player_2"><p class="shield_Pl_2">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_3">
+				<div class="options_player_3">
+					<div class="dmg_player_3"><p class="dmg_Pl_3">2</p></div>
+					<div class="shield_player_3"><p class="shield_Pl_3">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_4">
+				<div class="options_player_4">
+					<div class="dmg_player_4"><p class="dmg_Pl_4">2</p></div>
+					<div class="shield_player_4"><p class="shield_Pl_4">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_5">
+				<div class="options_player_5">
+					<div class="dmg_player_5"><p class="dmg_Pl_5">2</p></div>
+					<div class="shield_player_5"><p class="shield_Pl_5">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_6">
+				<div class="options_player_6">
+					<div class="dmg_player_6"><p class="dmg_Pl_6">2</p></div>
+					<div class="shield_player_6"><p class="shield_Pl_6">2</p></div>
+				</div>
+			</div>
+		</div>
+		<div class="field_player_down_2">
+			<div class="carta_playr_in_field_1">
+				<div class="options_player_1">
+					<div class="dmg_player_1"><p class="dmg_Pl_1">2</p></div>
+					<div class="shield_player_1"><p class="shield_Pl_1">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_2">
+				<div class="options_player_2">
+					<div class="dmg_player_2"><p class="dmg_Pl_2">2</p></div>
+					<div class="shield_player_2"><p class="shield_Pl_2">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_3">
+				<div class="options_player_3">
+					<div class="dmg_player_3"><p class="dmg_Pl_3">2</p></div>
+					<div class="shield_player_3"><p class="shield_Pl_3">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_4">
+				<div class="options_player_4">
+					<div class="dmg_player_4"><p class="dmg_Pl_4">2</p></div>
+					<div class="shield_player_4"><p class="shield_Pl_4">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_5">
+				<div class="options_player_5">
+					<div class="dmg_player_5"><p class="dmg_Pl_5">2</p></div>
+					<div class="shield_player_5"><p class="shield_Pl_5">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_6">
+				<div class="options_player_6">
+					<div class="dmg_player_6"><p class="dmg_Pl_6">2</p></div>
+					<div class="shield_player_6"><p class="shield_Pl_6">2</p></div>
+				</div>
+			</div>
+		</div>
+		<div class="field_player_down_3">
+			<div class="carta_playr_in_field_1">
+				<div class="options_player_1">
+					<div class="dmg_player_1"><p class="dmg_Pl_1">2</p></div>
+					<div class="shield_player_1"><p class="shield_Pl_1">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_2">
+				<div class="options_player_2">
+					<div class="dmg_player_2"><p class="dmg_Pl_2">2</p></div>
+					<div class="shield_player_2"><p class="shield_Pl_2">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_3">
+				<div class="options_player_3">
+					<div class="dmg_player_3"><p class="dmg_Pl_3">2</p></div>
+					<div class="shield_player_3"><p class="shield_Pl_3">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_4">
+				<div class="options_player_4">
+					<div class="dmg_player_4"><p class="dmg_Pl_4">2</p></div>
+					<div class="shield_player_4"><p class="shield_Pl_4">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_5">
+				<div class="options_player_5">
+					<div class="dmg_player_5"><p class="dmg_Pl_5">2</p></div>
+					<div class="shield_player_5"><p class="shield_Pl_5">2</p></div>
+				</div>
+			</div>
+			<div class="carta_playr_in_field_6">
+				<div class="options_player_6">
+					<div class="dmg_player_6"><p class="dmg_Pl_6">2</p></div>
+					<div class="shield_player_6"><p class="shield_Pl_6">2</p></div>
+				</div>
+			</div>
+		</div>		
+	</div>
+<!--Колода игрока-->
+	<div class="caloda_player">
+		<div class="caloda_player_down">
+			<div class="carta_player_1">
+				<div class="options_player_1">
+					<div class="dmg_player_1"><p class="dmg_Pl_1"></p></div>
+					<div class="shield_player_1"><p class="shield_Pl_1">2</p></div>
+				</div>
+			</div>
+			<div class="carta_player_2">
+				<div class="options_player_2">
+					<div class="dmg_player_2"><p class="dmg_Pl_2">2</p></div>
+					<div class="shield_player_2"><p class="shield_Pl_2">2</p></div>
+				</div>
+			</div>
+			<div class="carta_player_3">
+				<div class="options_player_3">
+					<div class="dmg_player_3"><p class="dmg_Pl_3">2</p></div>
+					<div class="shield_player_3"><p class="shield_Pl_3">2</p></div>
+				</div>
+			</div>
+			<div class="carta_player_4">
+				<div class="options_player_4">
+					<div class="dmg_player_4"><p class="dmg_Pl_4">2</p></div>
+					<div class="shield_player_4"><p class="shield_Pl_4">2</p></div>
+				</div>
+			</div>
+			<div class="carta_player_5">
+				<div class="options_player_5">
+					<div class="dmg_player_5"><p class="dmg_Pl_5">2</p></div>
+					<div class="shield_player_5"><p class="shield_Pl_5">2</p></div>
+				</div>
+			</div>
+			<div class="carta_player_6">
+				<div class="options_player_6">
+					<div class="dmg_player_6"><p class="dmg_Pl_6">2</p></div>
+					<div class="shield_player_6"><p class="shield_Pl_6">2</p></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<form><INPUT class="rel" TYPE="button" VALUE="кнопка перегрузки" onClick='parent.location="javascript:location.reload()"'></form>
+<script type="text/javascript">
+
+//------------------ ИГРОК -------------------------------------------------------------------------------
+alert('КРАСНОЕ-это урон; ЗЕЛЁНОЕ-это здоровье; Нажмите "БОЙ" для начала битвы; Снизу ваша колода.')
+	let win_en=0;
+	let win_pl=0;
+	//--------------------PLAYER	
+		let pl_dmg1;
+		let pl_dmg2;
+		let pl_dmg3;
+		let pl_hp1 ;
+		let pl_hp2 ;
+		let pl_hp3 ;
+	//--------------------ENEMY
+		let colona_1_enemy;
+		let colona_2_enemy;
+		let colona_3_enemy;
+	//-------------------------------- КАРТА	
+		let carta_player_1 = document.querySelector('.carta_player_1');
+		let carta_player_2 = document.querySelector('.carta_player_2');
+		let carta_player_3 = document.querySelector('.carta_player_3');
+		let carta_player_4 = document.querySelector('.carta_player_4');
+		let carta_player_5 = document.querySelector('.carta_player_5');
+		let carta_player_6 = document.querySelector('.carta_player_6');
+	//-------------------------------- КАРТА НА ПОЛЕ
+		let carta_playr_in_field_1 = document.querySelectorAll('.carta_playr_in_field_1');
+		let carta_playr_in_field_2 = document.querySelectorAll('.carta_playr_in_field_2');
+		let carta_playr_in_field_3 = document.querySelectorAll('.carta_playr_in_field_3');
+		let carta_playr_in_field_4 = document.querySelectorAll('.carta_playr_in_field_4');
+		let carta_playr_in_field_5 = document.querySelectorAll('.carta_playr_in_field_5');
+		let carta_playr_in_field_6 = document.querySelectorAll('.carta_playr_in_field_6');
+	//-------------------------------- УРОН КАРТЫ
+		let dmg_player_1 = document.querySelectorAll('.dmg_player_1');
+		let dmg_player_2 = document.querySelectorAll('.dmg_player_2');
+		let dmg_player_3 = document.querySelectorAll('.dmg_player_3');
+		let dmg_player_4 = document.querySelectorAll('.dmg_player_4');
+		let dmg_player_5 = document.querySelectorAll('.dmg_player_5');
+		let dmg_player_6 = document.querySelectorAll('.dmg_player_6');
+	//-------------------------------- ЗАЩИТА КАРТЫ
+		let shield_player_1 = document.querySelector('.shield_player_1');
+		let shield_player_2 = document.querySelector('.shield_player_2');
+		let shield_player_3 = document.querySelector('.shield_player_3');
+		let shield_player_4 = document.querySelector('.shield_player_4');
+		let shield_player_5 = document.querySelector('.shield_player_5');
+		let shield_player_6 = document.querySelector('.shield_player_6');
+
+	//-------------------------ЦИФРЫ--------------------
+		//--------------------------------- УРОН
+		let DMG_Pl_1=Math.round(Math.random() * (20 - 8) + 8);
+		let DMG_Pl_2=Math.round(Math.random() * (20 - 8) + 8);
+		let DMG_Pl_3=Math.round(Math.random() * (20 - 8) + 8);
+		let DMG_Pl_4=Math.round(Math.random() * (20 - 8) + 8);
+		let DMG_Pl_5=Math.round(Math.random() * (20 - 8) + 8);
+		let DMG_Pl_6=Math.round(Math.random() * (20 - 8) + 8);
+			let dmg_Pl_1 = document.querySelectorAll('.dmg_Pl_1');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_1[i].innerHTML=DMG_Pl_1;
+				}
+			let dmg_Pl_2 = document.querySelectorAll('.dmg_Pl_2');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_2[i].innerHTML=DMG_Pl_2;
+				}
+			let dmg_Pl_3 = document.querySelectorAll('.dmg_Pl_3');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_3[i].innerHTML=DMG_Pl_3;
+				}
+			let dmg_Pl_4 = document.querySelectorAll('.dmg_Pl_4');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_4[i].innerHTML=DMG_Pl_4;
+				}
+			let dmg_Pl_5 = document.querySelectorAll('.dmg_Pl_5');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_5[i].innerHTML=DMG_Pl_5;
+				}
+			let dmg_Pl_6 = document.querySelectorAll('.dmg_Pl_6');
+				for(i=0;i<4;i=i+1){
+					dmg_Pl_6[i].innerHTML=DMG_Pl_6;
+				}
+		//-------------------------------- ЗАЩИТА
+		let shld_Pl_1=Math.round(Math.random() * (20 - 8) + 8);
+		let shld_Pl_2=Math.round(Math.random() * (20 - 8) + 8);
+		let shld_Pl_3=Math.round(Math.random() * (20 - 8) + 8);
+		let shld_Pl_4=Math.round(Math.random() * (20 - 8) + 8);
+		let shld_Pl_5=Math.round(Math.random() * (20 - 8) + 8);
+		let shld_Pl_6=Math.round(Math.random() * (20 - 8) + 8);
+			let shield_Pl_1 = document.querySelectorAll('.shield_Pl_1');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_1[i].innerHTML=shld_Pl_1;
+				}
+			let shield_Pl_2 = document.querySelectorAll('.shield_Pl_2');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_2[i].innerHTML=shld_Pl_2;
+				}
+			let shield_Pl_3 = document.querySelectorAll('.shield_Pl_3');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_3[i].innerHTML=shld_Pl_3;
+				}
+			let shield_Pl_4 = document.querySelectorAll('.shield_Pl_4');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_4[i].innerHTML=shld_Pl_4;
+				}
+			let shield_Pl_5 = document.querySelectorAll('.shield_Pl_5');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_5[i].innerHTML=shld_Pl_5;
+				}
+			let shield_Pl_6 = document.querySelectorAll('.shield_Pl_6');
+				for(i=0;i<4;i=i+1){					
+					shield_Pl_6[i].innerHTML=shld_Pl_6;
+				}
+	
+	// Появление карты на нужном месте
+			// нажатие колода игрока
+					let hod = 0;
+					carta_player_1.onclick=function() { 
+						if(hod==0){			
+							carta_player_1.style.display='none';
+							carta_playr_in_field_1[0].style.display='block';
+							hod=hod+1;
+							num_kar1=1;
+							pl_dmg1=DMG_Pl_1;
+							pl_hp1=shld_Pl_1;
+						}else if(hod==1){
+							carta_player_1.style.display='none';
+							carta_playr_in_field_1[1].style.display='block';
+							hod=hod+1;
+							num_kar2=1;
+							pl_dmg2=DMG_Pl_1;
+							pl_hp2=shld_Pl_1;           // измени цифру поля
+						 }else if(hod==2){
+							carta_player_1.style.display='none';
+							carta_playr_in_field_1[2].style.display='block';
+							hod=hod+1;
+							num_kar3=1;
+							pl_dmg3=DMG_Pl_1;
+							pl_hp3=shld_Pl_1;
+						  }else if(hod>=3){
+							carta_player_1.onclick="none";	
+						}
+					}
+					carta_player_2.onclick=function() { 
+						
+						if(hod==0){			
+							carta_player_2.style.display='none';
+							carta_playr_in_field_2[0].style.display='block';
+							hod=hod+1;
+							num_kar1=2;
+							pl_dmg1=DMG_Pl_2;
+							pl_hp1=shld_Pl_2;
+						}else if(hod==1){
+							carta_player_2.style.display='none';
+							carta_playr_in_field_2[1].style.display='block';
+							hod=hod+1;
+							num_kar2=2;
+							pl_dmg2=DMG_Pl_2;
+							pl_hp2=shld_Pl_2;
+						}else if(hod==2){
+							carta_player_2.style.display='none';
+							carta_playr_in_field_2[2].style.display='block';
+							hod=hod+1;
+							num_kar3=2;
+							pl_dmg3=DMG_Pl_2;
+							pl_hp3=shld_Pl_2;
+						}else if(hod>=3){
+							carta_player_2.onclick="none";	
+						}
+					}
+					carta_player_3.onclick=function() { 
+						if(hod==0){			
+							carta_player_3.style.display='none';
+							carta_playr_in_field_3[0].style.display='block';
+							hod=hod+1;
+							num_kar1=3;
+							pl_dmg1=DMG_Pl_3;
+							pl_hp1=shld_Pl_3;
+						}else if(hod==1){
+							carta_player_3.style.display='none';
+							carta_playr_in_field_3[1].style.display='block';
+							hod=hod+1;
+							num_kar2=3;
+							pl_dmg2=DMG_Pl_3;
+							pl_hp2=shld_Pl_3;
+						}else if(hod==2){
+							carta_player_3.style.display='none';
+							carta_playr_in_field_3[2].style.display='block';
+							hod=hod+1;
+							num_kar3=3;
+							pl_dmg3=DMG_Pl_3;
+							pl_hp3=shld_Pl_3;
+						}else if(hod>=3){
+							carta_player_3.onclick="none";	
+						}
+					}
+					carta_player_4.onclick=function() { 
+						if(hod==0){			
+							carta_player_4.style.display='none';
+							carta_playr_in_field_4[0].style.display='block';
+							hod=hod+1;
+							num_kar1=4;
+							pl_dmg1=DMG_Pl_4;
+							pl_hp1=shld_Pl_4;
+						}else if(hod==1){
+							carta_player_4.style.display='none';
+							carta_playr_in_field_4[1].style.display='block';
+							hod=hod+1;
+							num_kar2=4;
+							pl_dmg2=DMG_Pl_4;
+							pl_hp2=shld_Pl_4;
+						}else if(hod==2){
+							carta_player_4.style.display='none';
+							carta_playr_in_field_4[2].style.display='block';
+							hod=hod+1;
+							num_kar3=4;
+							pl_dmg3=DMG_Pl_4;
+							pl_hp3=shld_Pl_4;
+						}else if(hod>=3){
+							carta_player_4.onclick="none";	
+						}
+					}
+					carta_player_5.onclick=function() { 						
+						if(hod==0){			
+							carta_player_5.style.display='none';
+							carta_playr_in_field_5[0].style.display='block';
+							hod=hod+1;
+							num_kar1=5;
+							pl_dmg1=DMG_Pl_5;
+							pl_hp1=shld_Pl_5;
+						}else if(hod==1){
+							carta_player_5.style.display='none';
+							carta_playr_in_field_5[1].style.display='block';
+							hod=hod+1;
+							num_kar2=5;
+							pl_dmg2=DMG_Pl_5;
+							pl_hp2=shld_Pl_5;
+						}else if(hod==2){
+							carta_player_5.style.display='none';
+							carta_playr_in_field_5[2].style.display='block';
+							hod=hod+1;
+							num_kar3=5;
+							pl_dmg3=DMG_Pl_5;
+							pl_hp3=shld_Pl_5;
+						}else if(hod>=3){
+							carta_player_5.onclick="none";	
+						}
+					}
+					carta_player_6.onclick=function() { 						
+						if(hod==0){			
+							carta_player_6.style.display='none';
+							carta_playr_in_field_6[0].style.display='block';
+							hod=hod+1;
+							num_kar1=6;
+							pl_dmg1=DMG_Pl_6;
+							pl_hp1=shld_Pl_6;
+						}else if(hod==1){
+							carta_player_6.style.display='none';
+							carta_playr_in_field_6[1].style.display='block';
+							hod=hod+1;
+							num_kar2=6;
+							pl_dmg2=DMG_Pl_6;
+							pl_hp2=shld_Pl_6;
+						}else if(hod==2){
+							carta_player_6.style.display='none';
+							carta_playr_in_field_6[2].style.display='block';
+							hod=hod+1;
+							num_kar3=6;
+							pl_dmg3=DMG_Pl_6;
+							pl_hp3=shld_Pl_6;
+						}else if(hod>=3){
+							carta_player_6.onclick="none";	
+						}
+					}
+
+			//Колода врага на поле
+
+//------------------------------------------------------- СОПЕРНИК ---------------------------------------
+		
+		
+	//----------------------------------- КАРТА
+		let carta_enemy_1 = document.querySelector('.carta_enemy_1');
+		let carta_enemy_2 = document.querySelector('.carta_enemy_2');
+		let carta_enemy_3 = document.querySelector('.carta_enemy_3');
+		//Это не важно \/\/\/\/\/\/\/
+		carta_enemy_1.style.opacity='0';
+		carta_enemy_2.style.opacity='0';
+		carta_enemy_3.style.opacity='0';
+		//Это не важно /\/\/\/\/\/\/\
+	//-----------------------------------  КАРТА НА ПОЛЕ
+		let carta_enemy_in_field_1 = document.querySelector('.carta_enemy_in_field_1');
+		let carta_enemy_in_field_2 = document.querySelector('.carta_enemy_in_field_2');
+		let carta_enemy_in_field_3 = document.querySelector('.carta_enemy_in_field_3');	
+		//Это не важно \/\/\/\/\/\/\/
+		let ffff= function() {
+		carta_enemy_in_field_1.style.opacity='1';
+		carta_enemy_in_field_2.style.opacity='1';
+		carta_enemy_in_field_3.style.opacity='1';}
+		setTimeout(ffff,3000);
+		//Это не важно /\/\/\/\/\/\/\
+	//----------------------------------- УРОН КАРТЫ
+		let dmg_En_1 = document.querySelector('.dmg_En_1');
+		let dmg_En_2 = document.querySelector('.dmg_En_2');
+		let dmg_En_3 = document.querySelector('.dmg_En_3');
+	//----------------------------------- ЗАЩИТА КАРТЫ
+		let shield_En_3 = document.querySelector('.shield_En_3');
+		let shield_En_2 = document.querySelector('.shield_En_2');
+		let shield_En_1 = document.querySelector('.shield_En_1');
+	//----------------------------------- ЦИФРЫ
+		//-------------------------------------- УРОН
+		let en_dmg1=Math.round(Math.random() * (21 - 8) + 8);
+		let en_dmg2=Math.round(Math.random() * (21 - 8) + 8);
+		let en_dmg3=Math.round(Math.random() * (21 - 8) + 8);
+		dmg_En_1.innerHTML=en_dmg1;		
+		dmg_En_2.innerHTML=en_dmg2;		
+		dmg_En_3.innerHTML=en_dmg3;
+		//-------------------------------------- ЗАЩИТА
+		let en_hp1=Math.round(Math.random() * (20 - 8) + 8);
+		let en_hp2=Math.round(Math.random() * (20 - 8) + 8);
+		let en_hp3=Math.round(Math.random() * (20 - 8) + 8);
+		shield_En_1.innerHTML=en_hp1;		
+		shield_En_2.innerHTML=en_hp2;		
+		shield_En_3.innerHTML=en_hp3;
+	
+
+
+//------------------------------------------------------- АТАКА ДВУХ СТОРОН ------------------------------
+	let btnn = document.querySelector('.btnn');
+	let stolb_1;
+	let stolb_2;
+	let stolb_3;
+	//внутринности
+	let en_live_1=0;
+	let en_live_2=0;
+	let en_live_3=0;
+	let pl_live_1=0;
+	let pl_live_2=0;
+	let pl_live_3=0;
+	btnn.onclick=function() {
+		/*
+			Урон_врага  Урон_игрока
+			en_dmg1		pl_dmg1
+			en_dmg2		pl_dmg2
+			en_dmg3		pl_dmg3
+	
+			Здоровье_врага   Здоровье_игрока
+			en_hp1			 pl_hp1
+			en_hp2			 pl_hp2
+			en_hp3			 pl_hp3
+		*/
+		if(hod==0){
+			alert('Выберите карты')
+		}else if(hod==1){
+			alert('Недастоёт карт')
+		}else if(hod==2){
+			alert('Выберите последнюю карту');
+		}else if(hod==3){
+			btnn.style.display='none';
+			//УРОН ВРАГАМ
+				//Первый столб
+				en_hp1=en_hp1-pl_dmg1;
+				//shield_En_1.innerHTML=en_hp1;
+					if (en_hp1>0){
+						en_live_1=1
+					}else if (en_hp1<1){
+						en_live_1=0
+					}
+				//Второй столб
+				en_hp2=en_hp2-pl_dmg2;
+				//shield_En_2.innerHTML=en_hp2;
+					if (en_hp2>0){
+						en_live_2=1
+					}else if (en_hp2<1){
+						en_live_2=0
+					}
+				//Третий столб
+				en_hp3=en_hp3-pl_dmg3;
+				//shield_En_3.innerHTML=en_hp3;
+					if (en_hp3>0){
+						en_live_3=1
+					}else if (en_hp3<1){
+						en_live_3=0
+					}
+			//УРОН ИГРОКУ
+				//Первый столб   				
+				pl_hp1=pl_hp1-en_dmg1;			
+					if (pl_hp1>0){
+						pl_live_1=1
+					}else if (en_hp1<1){
+						pl_live_1=0
+					}
+				//Второй столб
+				pl_hp2=pl_hp2-en_dmg2;
+					if (pl_hp2>0){
+						pl_live_2=1
+					}else if (en_hp2<1){
+						pl_live_2=0
+					}
+				//Третий столб
+				pl_hp3=pl_hp3-en_dmg3;
+					if (pl_hp3>0){
+						pl_live_3=1
+					}else if (en_hp3<1){
+						pl_live_3=0
+					}	
+			//ВЫБОР ПОБИДИТЕЛЯ
+				//сложение
+				win_en=en_live_3+en_live_2+en_live_1;
+				win_pl=pl_live_3+pl_live_2+pl_live_1;
+					if (win_pl>win_en) {
+						alert('Ты выйграл, молодец');
+					}else if (win_en>win_pl) {
+						alert('Тебя обыграли');
+					}else if (win_pl==win_en) {
+						alert('Ничья');
+					}
+		}
+	}
+
+	 	
+
+
+
+
+
+
+
+
+
+
+
+// при навидении увеличиваеться картинка чуть выше самой картинки"Отдельный див ,над картой который при навидении на саму карту появляеться увеличенная копия карты". пробел между ними приличный
+// при каждом обнавлении меняються карты.
+// враг ходит первым (выкладывает карты (сделать анимацию)).
+// у играка 6 карт(выберает 3 карты и сё).
+// при нажатии на первого(второго) ,он появляеться в первом(втором) столбце "Можно сделать так, нажал на первого D=D+1 появление в 1-ом столбце, если D==2 то картика2 появляеться во 2-ом столбце".
+// после нажатия карта исчезает"если S==1 то оно исчезает".
+
+
+</script>
+</body>
+</html>
